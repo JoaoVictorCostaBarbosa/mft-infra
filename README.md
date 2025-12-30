@@ -5,20 +5,25 @@ This directory contains the infrastructure setup for the **myFitTracker** projec
 ## Directory Structure
 
 ```
-infra-v1/
-├── docker-compose.yml # Main Docker Compose file
-├── env/ # Environment variable files
-│ ├── back.env
-│ ├── back.env.example
-│ ├── db.env
-│ ├── db.env.example
-│ ├── front.env
-│ └── front.env.example
-├── scripts/ # Helper scripts
-│ ├── build-backend.sh
-│ ├── build-frontend.sh
-│ └── up.sh
-└── README.md
+myFitTracker/
+├── infra-v1/
+│   ├── docker-compose.yml # Main Docker Compose file
+│   ├── env/ # Environment variable files
+│   │   ├── back.env
+│   │   ├── back.env.example
+│   │   ├── db.env
+│   │   ├── db.env.example
+│   │   ├── front.env
+│   │   └── front.env.example
+│   ├── scripts/ # Helper scripts
+│   │   ├── build-backend.sh
+│   │   ├── build-frontend.sh
+│   │   └── up.sh
+│   └── README.md
+│
+├── backend-v1/
+│
+└── frontend-v1/
 ```
 
 ## Prerequisites
@@ -116,3 +121,7 @@ cp env/db.env.example env/db.env
 
 - `postgres_data` – stores PostgreSQL data persistently across container restarts.
 
+## Project Repositories
+
+- Backend: [backend repo](https://github.com/JoaoVictorCostaBarbosa/mft-back.git)
+- Frontend: [frontend repo](https://github.com/JoaoVictorCostaBarbosa/mft-front.git)
