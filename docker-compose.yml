@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:15
+    container_name: mft-db
+    env_file:
+      - ./env/db.env
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  migration:
+    image: ${BACKEND_IMAGE}:${BACKEND_VERSION}
+    container_name: mft-migration
+    env_file:
+      - ./env/back.env
+    depends_on:
+      db:
+        condition: service_healthy
+    command: /app/backend-v1 --migrate
+    profiles:
+      - migrate
+
+  backend:
+    image: ${BACKEND_IMAGE}:${BACKEND_VERSION}
+    container_name: mft-backend
+    env_file:
+      - ./env/back.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    command: /app/backend-v1
+    
+  frontend:
+    image: ${FRONTEND_IMAGE}:${FRONTEND_VERSION}
+    container_name: mft-frontend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./env/front.env
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

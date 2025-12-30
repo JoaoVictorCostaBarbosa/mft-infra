@@ -1,0 +1,14 @@
+.env
+.env.*
+env/*.env
+!.env.example
+
+postgres_data/
+volumes/
+
+# 
+*.log
+
+.DS_Store
+.idea/
+.vscode/
