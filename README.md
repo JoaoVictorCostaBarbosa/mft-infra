@@ -58,6 +58,7 @@ cp env/db.env.example env/db.env
 - scripts/build-backend.sh – builds the backend Docker image with the version defined in .env.
 - scripts/build-frontend.sh – builds the frontend Docker image with the version defined in .env.
 - scripts/up.sh – brings up the full infrastructure using Docker Compose.
+- scripts/down.sh – shuts down the full infrastructure using Docker Compose.
 
 ## Docker Compose Services
 
